@@ -9,13 +9,14 @@ def update():
         chess.update()
 def infor(point):
     for chess in chesses:
-        if chess.point == point:
-            print("Chess name:", type(chess))
-            print("Chess position:", chess.point.x, chess.point.y)
-            if(chess.white):
-                print("White chess")
-            elif(chess.white == 0):
-                print("Dark chess")
+        if chess.active:
+            if chess.point == point:
+                print("Chess name:", type(chess))
+                print("Chess position:", chess.point.x, chess.point.y)
+                if(chess.white):
+                    print("White chess")
+                elif(chess.white == 0):
+                    print("Dark chess")
 class Chess:
     def __init__(self, point, shape, white):
         self.point = point

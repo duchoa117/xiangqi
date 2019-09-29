@@ -1,20 +1,10 @@
 from chess.chess import Chess, chesses
 from chess import chess
-from chess.tempPoint import TempPoint
 from point.point import Point
-from chess.tot import Tot
-# setup:
-for i in range(10):
-    for j in range(9):
-        t = TempPoint(Point(i,j), 1)
-        chess.add(t)
-totTrang = Tot(Point(2,1), 0)
-chess.add(totTrang)
-for chess in chesses:
-    if type(chess) == TempPoint:
-        if(totTrang.point == chess.point):
-            chess.deactivate()
+import setUp
 
+# setup:
+setUp.setChess()
 # end setup
 
 def renderMap():
@@ -28,7 +18,7 @@ def renderMap():
                     print(j, end = ' ')
             elif(j == -1 and i > -1):
                 print(i, end = ' ')
-            p = Point(i, j)
+            p = Point(j, i)
             for chess in chesses:
                 chess.update(p)
         print()

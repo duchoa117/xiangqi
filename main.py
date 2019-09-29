@@ -2,7 +2,6 @@
 import map
 from chess.chess import Chess, chesses
 from chess import chess
-from chess.tempPoint import TempPoint
 from point.point import Point
 
 while(True):
