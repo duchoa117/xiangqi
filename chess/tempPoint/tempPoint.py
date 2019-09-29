@@ -10,8 +10,8 @@ class TempPoint(Chess):
 
 
 def createTempPoint():
-    for i in range(10):
-        for j in range(9):
+    for i in range(9):
+        for j in range(10):
             temp = TempPoint(Point(i,j), 1)
             chess.add(temp)
 
