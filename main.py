@@ -1,15 +1,10 @@
 
-import map
+from map import renderMap
 from chess.chess import Chess, chesses
 from chess import chess
 from point.point import Point
+from gameIO import gameIO
 
 while(True):
-    map.renderMap()
-    print("Position: ")
-    x = int(input("x = "))
-    y = int(input("y = "))
-    tP = Point(x, y)
-    print("Chess information: ")
-    chess.infor(tP)
-    input()
+    renderMap()
+    gameIO()
