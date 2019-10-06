@@ -28,7 +28,6 @@ class Ma(Chess):
                 (abs(m.x - self.point.x) == 2 and abs(m.y-self.point.y) == 1) ):
                 if(not self.isTeammatePoint(m)):
                     if(abs(m.x - self.point.x) == 1):
-                        print(Point(self.point.x,self.point.y + (m.y-self.point.y)/abs((self.point.y-m.y))))
                         if(not (chess.isChessPoint(Point(self.point.x,self.point.y + (m.y-self.point.y)/abs(m.y-self.point.y)  )))):
                             self.pMove.append(m)
                     elif (abs(m.x - self.point.x) == 2): 
