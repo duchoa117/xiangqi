@@ -5,6 +5,7 @@ from chess.tempPoint.tempPoint import TempPoint
 import math
 
 
+
 class Tuong(Chess):
     def __init__(self, point, white):
         if(white == 1):
