@@ -43,7 +43,7 @@ class Chess:
         for c in chesses:
             if c.point == point:
                 if(c.active):
-                    return self.isTeammate(c)
+                        return self.isTeammate(c)
     def render(self):
         if(self.active):
             print(self.shape, end = ' ')
