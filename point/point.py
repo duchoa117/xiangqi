@@ -27,9 +27,9 @@ class Point:
         return Point(x,y)
     def __lt__(self, other):
         return((self.x < other.x) and (self.y < other.y))
-    def __le__(self, other):
+    def __le__(self, other): 
         return((self.x <= other.x) and (self.y <= other.y))
-    def __ne__(self, other):
+    def __ne__(self, other): 
         return((self.x != other.x) and (self.y != other.y))
     def __gt__(self, other):
         return((self.x > other.x) and(self.y > other.y))

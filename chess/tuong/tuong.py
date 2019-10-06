@@ -4,6 +4,7 @@ from point.point import Point
 from chess.tempPoint.tempPoint import TempPoint
 
 
+
 class Tuong(Chess):
     def __init__(self, point, white):
         if(white == 1):

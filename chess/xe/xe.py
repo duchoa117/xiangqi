@@ -10,8 +10,54 @@ class Xe(Chess):
             Chess.__init__(self, point, "X", white)
         elif(white == 0):
             Chess.__init__(self, point, "x", white)
-
-
+        self.primitiveMove = []
+        for i in range(9):
+            for j in range(10):
+                self.primitiveMove.append(Point(i,j))
+    def positiveMove(self):
+        # setUp:
+        self.pMove.clear()
+        # Your code:
+        for i in range(self.point.x+1, 9, 1):
+            tPoint =  Point(i, self.point.y)
+            if(not chess.isChessPoint(tPoint)):
+                self.pMove.append(tPoint)
+            else:
+                if(self.isTeammatePoint(tPoint)):
+                    break
+                else:
+                    self.pMove.append(tPoint)
+                    break
+        for i in range(self.point.x-1, -1, -1):
+            tPoint =  Point(i, self.point.y)
+            if(not chess.isChessPoint(tPoint)):
+                self.pMove.append(tPoint)
+            else:
+                if(self.isTeammatePoint(tPoint)):
+                    break
+                else:
+                    self.pMove.append(tPoint)
+                    break
+        for i in range(self.point.y+1, 10, 1):
+            tPoint =  Point(self.point.x, i)
+            if(not chess.isChessPoint(tPoint)):
+                self.pMove.append(tPoint)
+            else:
+                if(self.isTeammatePoint(tPoint)):
+                    break
+                else:
+                    self.pMove.append(tPoint)
+                    break
+        for i in range(self.point.y-1, -1, -1):
+            tPoint =  Point(self.point.x, i)
+            if(not chess.isChessPoint(tPoint)):
+                self.pMove.append(tPoint)
+            else:
+                if(self.isTeammatePoint(tPoint)):
+                    break
+                else:
+                    self.pMove.append(tPoint)
+                    break
 
 def createXe():
     for i in range(2):
