@@ -22,6 +22,13 @@ def infor(point):
     print("- Positive move:")
     chess.printpMList()
     return chess
+def isChessPoint(point):
+    for c in chesses:
+        if(c.point == point):
+            if(c.active):
+                if(c.white != None):
+                    return True
+    return False
 
 class Chess:
     def __init__(self, point, shape, white):
@@ -62,5 +69,7 @@ class Chess:
     def printpMList(self):
         for p in self.pMove:
             print(p)
+
+                
     
 

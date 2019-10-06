@@ -18,3 +18,4 @@ def setChess():
         createPhao()
         createMa()
         createTuong()
+        

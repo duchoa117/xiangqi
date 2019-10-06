@@ -14,6 +14,8 @@ def gameIO():
         movePositionX = int(input("X: "))
         movePositionY = int(input("Y: "))
         c.move(Point(movePositionX, movePositionY))
+
+
     
 
 
