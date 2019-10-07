@@ -10,13 +10,13 @@ class Ma(Chess):
             Chess.__init__(self, point, "M", white)
             self.primitiveMove= []
             for i in range (0,9,1):
-                for j in range (0,9,1):
+                for j in range (0,10,1):
                     self.primitiveMove.append(Point(i,j))
         elif(white == 0):
             Chess.__init__(self, point, "m", white)
             self.primitiveMove= []
             for i in range (0,9,1):
-                for j in range (0,9,1):
+                for j in range (0,10,1):
                     self.primitiveMove.append(Point(i,j))
 
     def positiveMove(self):
