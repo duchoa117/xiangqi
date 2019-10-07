@@ -68,7 +68,8 @@ class Chess:
         print(self.point)
     def printpMList(self):
         for p in self.pMove:
-            print(p)
+            print(p, end = " ")
+        print()
 
                 
     
