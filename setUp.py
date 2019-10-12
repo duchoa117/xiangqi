@@ -8,6 +8,8 @@ from chess.xe.xe import createXe
 from chess.phao.phao import createPhao
 from chess.ma.ma import createMa
 from chess.tuong.tuong import createTuong
+from player.human import createHuman
+from player.machine import createMachine
 
 def setChess():
         createTempPoint()
@@ -18,4 +20,6 @@ def setChess():
         createPhao()
         createMa()
         createTuong()
+        createHuman()
+        createMachine()
         
