@@ -14,18 +14,25 @@ class Machine(Player):
         # end 
         board.chesses = minimaxMove(board).chesses
 def minimaxMove(board):
+    alpha = -10000
+    beta = +10000
     depth = 0
     topBoardNo = 0
     topScore = -100000
     boards = board.generateNewBoardBlacksTurn()
-    print(len(boards))
-
     for i in range(len(boards)):
         if(not boards[i].isDead(1)):
-            score = minFun(boards[i], depth + 1)
+            score = minFun(boards[i], depth + 1, alpha, beta)
             if(score > topScore):
                 topBoardNo = i
                 topScore = score
+            if(score > topScore):
+                topBoardNo = i
+                topScore = score
+            if(score > beta):
+                return boards[topBoardNo]
+            if(score > alpha):
+                alpha = score
     return boards[topBoardNo]
 
 
