@@ -18,30 +18,44 @@ class Ma(Chess):
             for i in range (0,9,1):
                 for j in range (0,10,1):
                     self.primitiveMove.append(Point(i,j))
+        self.value = 4
+        
 
-    def positiveMove(self):
+    def positiveMove(self, currentBoard):
         #setUp:
         self.pMove.clear()
         # Your code:
         for m in self.primitiveMove:
             if((abs(m.x - self.point.x) == 1 and abs(m.y-self.point.y) == 2) or 
                 (abs(m.x - self.point.x) == 2 and abs(m.y-self.point.y) == 1) ):
-                if(not self.isTeammatePoint(m)):
+                if(not self.isTeammatePoint(m, currentBoard)):
                     if(abs(m.x - self.point.x) == 1):
-                        if(not (chess.isChessPoint(Point(self.point.x,self.point.y + (m.y-self.point.y)/abs(m.y-self.point.y)  )))):
+                        if(not (chess.isChessPoint(Point(self.point.x,self.point.y + (m.y-self.point.y)/abs(m.y-self.point.y)  ), currentBoard))):
                             self.pMove.append(m)
                     elif (abs(m.x - self.point.x) == 2): 
-                        if(not (chess.isChessPoint(Point(self.point.x + (m.x-self.point.x)/abs(m.x-self.point.x), self.point.y )))):
+                        if(not (chess.isChessPoint(Point(self.point.x + (m.x-self.point.x)/abs(m.x-self.point.x), self.point.y ), currentBoard))):
                             self.pMove.append(m)
+    def clone(self):
+        clone = Ma(self.point, self.white)
+        clone.active = self.active
+        return clone
+
+    def genarateNewBoards(self, currentBoard):
+        boards = []
+        self.positiveMove(currentBoard)
+        for i in range(len(self.pMove)):
+            boards.append(currentBoard.clone())
+            boards[i].move(self.point, self.pMove[i])
+        return boards
 
 
 
-def createMa():
+def createMa(board):
     for i in range(2):
         for j in range(2):
             ma = Ma(Point(1+6*j, i*9), 1-i)
-            chess.add(ma)
-            for c in chesses:
+            board.chesses.append(ma)
+            for c in board.chesses:
                 if type(c) == TempPoint:
                     if(c.point == ma.point):
                         c.deactivate()

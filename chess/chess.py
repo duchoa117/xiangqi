@@ -7,8 +7,8 @@ def add(chess):
 def update():
     for chess in chesses:
         chess.update()
-def infor(point):
-    for chess in chesses:
+def infor(point, board):
+    for chess in board.chesses:
         if chess.active:
             if chess.point == point:
                 print("- Chess name:", type(chess))
@@ -18,12 +18,12 @@ def infor(point):
                 elif(chess.white == 0):
                     print("- Dark chess")
                 break
-    chess.positiveMove()
+    chess.positiveMove(board)
     print("- Positive move:")
     chess.printpMList()
     return chess
-def isChessPoint(point):
-    for c in chesses:
+def isChessPoint(point, board):
+    for c in board.chesses:
         if(c.point == point):
             if(c.active):
                 if(c.white != None):
@@ -37,10 +37,11 @@ class Chess:
         self.white = white
         self.active = True
         self.pMove = []
+        self.value = 0
     def isTeammate(self, other):
         return(self.white == other.white)
-    def isTeammatePoint(self, point):
-        for c in chesses:
+    def isTeammatePoint(self, point, board):
+        for c in board.chesses:
             if c.point == point:
                 if(c.active):
                         return self.isTeammate(c)
@@ -54,22 +55,41 @@ class Chess:
         self.active = False
     def activate(self):
         self.active = True
-    def positiveMove(self):
+    def positiveMove(self, board):
         pass
-    def move(self, point):
-        for c in chesses:
+    # def move(self, point):
+    #     for c in chesses:
+    #         if c.point == point:
+    #             c.deactivate()
+    #         if c.shape == ".":
+    #             if c.point == self.point:
+    #                 c.activate()
+
+    #     self.point = point
+
+    def move(self, point, board):
+        for c in board.chesses:
             if c.point == point:
                 c.deactivate()
             if c.shape == ".":
                 if c.point == self.point:
                     c.activate()
-        print(point)
         self.point = point
-        print(self.point)
     def printpMList(self):
         for p in self.pMove:
             print(p, end = " ")
         print()
+    def generateNewBoards(self, currentBoard):
+        boards = []
+        self.positiveMove(currentBoard)
+        for i in range(self.pMove.len()):
+            boards.append(currentBoard.clone())
+            boards[i].move(self.point, self.pMove[i])
+        return boards
+    def clone():
+        pass
+            
+        
 
                 
     

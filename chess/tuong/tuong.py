@@ -20,26 +20,40 @@ class Tuong(Chess):
             for i in range (0,9,1):
                 for j in range (5,10,1):
                     self.primitiveMove.append(Point(i,j))
+        self.value = 3
+        
             
-    def positiveMove(self):
+    def positiveMove(self, currentBoard):
         #setUp:
         self.pMove.clear()
         # Your code:
         for m in self.primitiveMove:
             if(abs(m.x - self.point.x) == 2 and abs(m.y-self.point.y) == 2):
-                if(not self.isTeammatePoint(m)):
-                    if(not (chess.isChessPoint(self.point+(m-self.point)*(1/2)))):
+                if(not self.isTeammatePoint(m, currentBoard)):
+                    if(not (chess.isChessPoint(self.point+(m-self.point)*(1/2), currentBoard))):
                         self.pMove.append(m)
+    def clone(self):
+        clone = Tuong(self.point, self.white)
+        clone.active = self.active
+        return clone
+
+    def genarateNewBoards(self, currentBoard):
+        boards = []
+        self.positiveMove(currentBoard)
+        for i in range(len(self.pMove)):
+            boards.append(currentBoard.clone())
+            boards[i].move(self.point, self.pMove[i])
+        return boards
 
 
 
 
-def createTuong():
+def createTuong(board):
     for i in range(2):
         for j in range(2):
             tuong = Tuong(Point(2+4*j, i*9), 1-i)
-            chess.add(tuong)
-            for c in chesses:
+            board.chesses.append(tuong)
+            for c in board.chesses:
                 if type(c) == TempPoint:
                     if(c.point == tuong.point):
                         c.deactivate()

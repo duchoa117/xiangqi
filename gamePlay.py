@@ -1,5 +1,4 @@
 from player.player import players
-
-def gamePlay():
+def gamePlay(board):
     for p in players:
-        p.play()
+        p.play(board)

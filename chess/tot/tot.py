@@ -9,7 +9,8 @@ class Tot(Chess):
             Chess.__init__(self, point, "T", white)
         elif(white == 0):
             Chess.__init__(self, point, "t", white)
-    def positiveMove(self):
+        self.value = 1
+    def positiveMove(self, currentBoard):
         # setUp:
         self.pMove.clear()
         # Your code:
@@ -22,7 +23,7 @@ class Tot(Chess):
                 for i in range(-1, 2, 2):
                     mL.append(self.point + Point(i, 0))
             for m in mL:
-                if ((not self.isTeammatePoint(m)) and m.checkOnBoard()):
+                if ((not self.isTeammatePoint(m, currentBoard)) and m.checkOnBoard()):
                     # add tP in Positive Move:
                     self.pMove.append(m)
                 # _____________________________________
@@ -34,20 +35,35 @@ class Tot(Chess):
                 for i in range(-1, 2, 2):
                     mL.append(self.point + Point(i, 0))
             for m in mL:
-                if ((not self.isTeammatePoint(m)) and m.checkOnBoard()):
+                if ((not self.isTeammatePoint(m, currentBoard)) and m.checkOnBoard()):
                     # add tP in Positive Move:
                     self.pMove.append(m)
                 # _____________________________________
+    def clone(self):
+        clone = Tot(self.point, self.white)
+        clone.active = self.active
+        return clone
 
-def createTot():
+
+    def genarateNewBoards(self, currentBoard):
+        boards = []
+        self.positiveMove(currentBoard)
+        for i in range(len(self.pMove)):
+            boards.append(currentBoard.clone())
+            boards[i].move(self.point, self.pMove[i])
+        return boards
+
+        
+
+def createTot(board):
     for i in range(2):
         for j in range(5):
             if(i == 0):
                 tot = Tot(Point(j*2, 3), 1)
             elif(i == 1):
                 tot = Tot(Point(j*2, 6), 0)
-            chess.add(tot)
-            for c in chesses:
+            board.chesses.append(tot)
+            for c in board.chesses:
                 if type(c) == TempPoint:
                     if(c.point == tot.point):
                         c.deactivate()

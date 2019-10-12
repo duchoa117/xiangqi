@@ -19,22 +19,36 @@ class King(Chess):
             for i in range(3,6,1):
                 for j in range(7,10,1):
                     self.primitiveMove.append(Point(i,j)) 
-    def positiveMove(self):
+        self.value = 1000
+        
+    def positiveMove(self, currentBoard):
         # setUp:
         self.pMove.clear()
         # Your code:
         for m in self.primitiveMove:
             if (abs(m.x-self.point.x) + abs(m.y-self.point.y) == 1):
-                if (not self.isTeammatePoint(m)):
+                if (not self.isTeammatePoint(m, currentBoard)):
                     self.pMove.append(m)
+    def clone(self):
+        clone = King(self.point, self.white)
+        clone.active = self.active
+        return clone
+    def genarateNewBoards(self, currentBoard):
+        boards = []
+        self.positiveMove(currentBoard)
+        for i in range(len(self.pMove)):
+            boards.append(currentBoard.clone())
+            boards[i].move(self.point, self.pMove[i])
+        return boards
 
 
 
-def createKing():
+
+def createKing(board):
     for i in range(2):
         king = King(Point(4, 0 + i*9), 1-i)
-        chess.add(king)
-        for c in chesses:
+        board.chesses.append(king)
+        for c in board.chesses:
                 if type(c) == TempPoint:
                     if(c.point == king.point):
                         c.deactivate()
