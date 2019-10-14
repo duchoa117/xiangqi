@@ -10,13 +10,13 @@ from chess.ma.ma import createMa
 from chess.tuong.tuong import createTuong
 def setChess(broad):
         createTempPoint(broad)
-        createTot(broad)
         createKing(broad)
         createSi(broad)
-        createXe(broad)
         createPhao(broad)
-        createMa(broad)
+        createXe(broad)
         createTuong(broad)
+        createMa(broad)
+        createTot(broad)
 class Board():
     def __init__(self):
         self.chesses = []

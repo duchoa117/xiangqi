@@ -1,7 +1,8 @@
 from player.player import players
 from map import renderMap
 def gamePlay(board):
-        players[0].play(board)
+        print("White Machine is thinking.....")
+        players[1].play(board, 1)
         renderMap(board)
-        print("Machine is thinking.....")
-        players[1].play(board)
+        print("Balck Machine is thinking.....")
+        players[1].play(board, 0)
