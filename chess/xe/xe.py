@@ -14,6 +14,7 @@ class Xe(Chess):
         for i in range(9):
             for j in range(10):
                 self.primitiveMove.append(Point(i,j))
+        self.value = 10
     def positiveMove(self, currentBoard):
         # setUp:
         self.pMove.clear()

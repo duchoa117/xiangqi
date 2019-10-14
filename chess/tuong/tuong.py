@@ -20,7 +20,7 @@ class Tuong(Chess):
             for i in range (0,9,1):
                 for j in range (5,10,1):
                     self.primitiveMove.append(Point(i,j))
-        self.value = 3
+        self.value = 2
         
             
     def positiveMove(self, currentBoard):
