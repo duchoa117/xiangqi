@@ -1,4 +1,7 @@
 from player.player import players
+from map import renderMap
 def gamePlay(board):
-    for p in players:
-        p.play(board)
+        players[0].play(board)
+        renderMap(board)
+        print("Machine is thinking.....")
+        players[1].play(board)
