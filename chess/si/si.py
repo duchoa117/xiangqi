@@ -13,7 +13,7 @@ class Si(Chess):
         elif(white == 0):
             Chess.__init__(self, point, "s", white)
             self.primitiveMove = [Point(3,9), Point(3,7), Point(4,8), Point(5,9), Point(5,7)]
-        self.value = 2
+        self.value = 120
             
     def positiveMove(self, currentBoard):
         # setUp:
@@ -26,6 +26,8 @@ class Si(Chess):
     def clone(self):
         clone = Si(self.point, self.white)
         clone.active = self.active
+        clone.value = self.value
+
         return clone
 
     def genarateNewBoards(self, currentBoard):

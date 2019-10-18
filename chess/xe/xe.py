@@ -14,6 +14,7 @@ class Xe(Chess):
         for i in range(9):
             for j in range(10):
                 self.primitiveMove.append(Point(i,j))
+        self.value = 600
     def positiveMove(self, currentBoard):
         # setUp:
         self.pMove.clear()
@@ -61,6 +62,7 @@ class Xe(Chess):
     def clone(self):
         clone = Xe(self.point, self.white)
         clone.active = self.active
+        clone.value = self.value
         return clone
 
     def genarateNewBoards(self, currentBoard):

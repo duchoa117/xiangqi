@@ -14,7 +14,7 @@ class Phao(Chess):
         for i in range(9):
             for j in range(10):
                 self.primitiveMove.append(Point(i,j))
-        self.value = 5
+        self.value = 285
         
         
     def positiveMove(self, currentBoard):
@@ -82,6 +82,8 @@ class Phao(Chess):
     def clone(self):
         clone = Phao(self.point, self.white)
         clone.active = self.active
+        clone.value = self.value
+
         return clone
 
     def genarateNewBoards(self, currentBoard):

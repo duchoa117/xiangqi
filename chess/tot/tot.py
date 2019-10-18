@@ -9,7 +9,7 @@ class Tot(Chess):
             Chess.__init__(self, point, "T", white)
         elif(white == 0):
             Chess.__init__(self, point, "t", white)
-        self.value = 1
+        self.value = 30
     def positiveMove(self, currentBoard):
         # setUp:
         self.pMove.clear()
@@ -20,6 +20,7 @@ class Tot(Chess):
             mL.append(m1)
 
             if(self.point.y > 4):
+                self.value = 60
                 for i in range(-1, 2, 2):
                     mL.append(self.point + Point(i, 0))
             for m in mL:
@@ -42,6 +43,8 @@ class Tot(Chess):
     def clone(self):
         clone = Tot(self.point, self.white)
         clone.active = self.active
+        clone.value = self.value
+
         return clone
 
 

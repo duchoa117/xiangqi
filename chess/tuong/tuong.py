@@ -20,7 +20,7 @@ class Tuong(Chess):
             for i in range (0,9,1):
                 for j in range (5,10,1):
                     self.primitiveMove.append(Point(i,j))
-        self.value = 3
+        self.value = 120
         
             
     def positiveMove(self, currentBoard):
@@ -35,6 +35,8 @@ class Tuong(Chess):
     def clone(self):
         clone = Tuong(self.point, self.white)
         clone.active = self.active
+        clone.value = self.value
+
         return clone
 
     def genarateNewBoards(self, currentBoard):

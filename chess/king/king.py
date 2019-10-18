@@ -19,7 +19,7 @@ class King(Chess):
             for i in range(3,6,1):
                 for j in range(7,10,1):
                     self.primitiveMove.append(Point(i,j)) 
-        self.value = 1000
+        self.value = 6000
         
     def positiveMove(self, currentBoard):
         # setUp:
@@ -32,6 +32,7 @@ class King(Chess):
     def clone(self):
         clone = King(self.point, self.white)
         clone.active = self.active
+        clone.value = self.value
         return clone
     def genarateNewBoards(self, currentBoard):
         boards = []

@@ -18,7 +18,7 @@ class Ma(Chess):
             for i in range (0,9,1):
                 for j in range (0,10,1):
                     self.primitiveMove.append(Point(i,j))
-        self.value = 4
+        self.value = 270
         
 
     def positiveMove(self, currentBoard):
@@ -38,6 +38,8 @@ class Ma(Chess):
     def clone(self):
         clone = Ma(self.point, self.white)
         clone.active = self.active
+        clone.value = self.value
+
         return clone
 
     def genarateNewBoards(self, currentBoard):
