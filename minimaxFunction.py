@@ -17,8 +17,6 @@ def minFun(board, depth, alpha, beta):
                 beta = score
 
             
-
-
     return lowestScore
 def maxFun(board, depth, alpha, beta):
     topScore = -100000

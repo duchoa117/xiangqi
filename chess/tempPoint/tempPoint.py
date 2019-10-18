@@ -12,8 +12,6 @@ class TempPoint(Chess):
         clone.active = self.active
         return clone
 
-
-
 def createTempPoint(board):
     for i in range(9):
         for j in range(10):

@@ -10,13 +10,15 @@ from chess.ma.ma import createMa
 from chess.tuong.tuong import createTuong
 def setChess(broad):
         createTempPoint(broad)
-        createKing(broad)
-        createSi(broad)
-        createPhao(broad)
-        createXe(broad)
-        createTuong(broad)
         createMa(broad)
         createTot(broad)
+        createXe(broad)
+        createSi(broad)
+        createPhao(broad)
+        createTuong(broad)
+        createKing(broad)
+        
+        
 class Board():
     def __init__(self):
         self.chesses = []
@@ -24,6 +26,7 @@ class Board():
         setChess(self)
 
     def setScore(self):
+        self.score = 0
         for c in self.chesses:
             if(c.active):
                 if(c.white):
@@ -45,20 +48,18 @@ class Board():
         for c in self.chesses:
             if(c.white):
                 if(c.active):
-                    if(c.shape !=  "."):
-                        tempBoards = c.genarateNewBoards(self)
-                        for tB in tempBoards:
-                            boards.append(tB)
+                    tempBoards = c.genarateNewBoards(self)
+                    for tB in tempBoards:
+                        boards.append(tB)
         return boards
     def generateNewBoardBlacksTurn(self):
         boards = []
         for c in self.chesses:
             if(c.white == 0):
                 if(c.active):
-                    if(c.shape !=  "."):
-                        tempBoards = c.genarateNewBoards(self)
-                        for tB in tempBoards:
-                            boards.append(tB)
+                    tempBoards = c.genarateNewBoards(self)
+                    for tB in tempBoards:
+                        boards.append(tB)
         return boards
     
     def move(self, fromPoint, toPoint):
