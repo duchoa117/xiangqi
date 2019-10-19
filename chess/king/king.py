@@ -19,7 +19,7 @@ class King(Chess):
             for i in range(3,6,1):
                 for j in range(7,10,1):
                     self.primitiveMove.append(Point(i,j)) 
-        self.value = 6000
+        self.value = 10000
         
     def positiveMove(self, currentBoard):
         # setUp:

@@ -32,6 +32,7 @@ class Tuong(Chess):
                 if(not self.isTeammatePoint(m, currentBoard)):
                     if(not (chess.isChessPoint(self.point+(m-self.point)*(1/2), currentBoard))):
                         self.pMove.append(m)
+                        
     def clone(self):
         clone = Tuong(self.point, self.white)
         clone.active = self.active

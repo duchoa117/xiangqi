@@ -21,7 +21,7 @@ def minimaxMove(board):
     topScore = -100000
     boards = board.generateNewBoardBlacksTurn()
     for i in range(len(boards)):
-        if(not boards[i].isDead(1)):
+        if(not boards[i].isDead(0)):
             score = minFun(boards[i], depth + 1, alpha, beta)
             if(score > topScore):
                 topBoardNo = i

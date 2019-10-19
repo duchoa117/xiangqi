@@ -7,7 +7,7 @@ def minFun(board, depth, alpha, beta):
         return board.score 
     boards = board.generateNewBoardWhitesTurn()
     for i in range(len(boards)):
-        if(not (boards[i]).isDead(0)):
+        if(not (boards[i]).isDead(1)):
             score = maxFun(boards[i], depth + 1, alpha, beta)
             if(score < lowestScore):
                 lowestScore = score
@@ -27,7 +27,7 @@ def maxFun(board, depth, alpha, beta):
         return board.score 
     boards = board.generateNewBoardBlacksTurn()
     for i in range(len(boards)):
-        if(not(boards[i]).isDead(1)):
+        if(not(boards[i]).isDead(0)):
             score = minFun(boards[i], depth + 1, alpha, beta)
             if(score > topScore):
                 topScore = score
