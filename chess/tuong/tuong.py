@@ -1,4 +1,4 @@
-from chess.chess import Chess, chesses
+from chess.chess import Chess
 from chess import chess
 from point.point import Point
 from chess.tempPoint.tempPoint import TempPoint
@@ -56,6 +56,8 @@ def createTuong(board):
         for j in range(2):
             tuong = Tuong(Point(2+4*j, i*9), 1-i)
             board.chesses.append(tuong)
+            board.activeChesses.append(tuong)
+
             for c in board.chesses:
                 if type(c) == TempPoint:
                     if(c.point == tuong.point):

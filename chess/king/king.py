@@ -1,4 +1,4 @@
-from chess.chess import Chess, chesses
+from chess.chess import Chess
 from chess import chess
 from point.point import Point
 from chess.tempPoint.tempPoint import TempPoint
@@ -49,6 +49,7 @@ def createKing(board):
     for i in range(2):
         king = King(Point(4, 0 + i*9), 1-i)
         board.chesses.append(king)
+        board.activeChesses.append(king)
         for c in board.chesses:
                 if type(c) == TempPoint:
                     if(c.point == king.point):

@@ -1,4 +1,4 @@
-from chess.chess import Chess, chesses
+from chess.chess import Chess
 from chess import chess
 from point.point import Point
 from chess.tempPoint.tempPoint import TempPoint
@@ -57,6 +57,8 @@ def createMa(board):
         for j in range(2):
             ma = Ma(Point(1+6*j, i*9), 1-i)
             board.chesses.append(ma)
+            board.activeChesses.append(ma)
+
             for c in board.chesses:
                 if type(c) == TempPoint:
                     if(c.point == ma.point):

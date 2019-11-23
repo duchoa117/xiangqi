@@ -1,4 +1,4 @@
-from chess.chess import Chess, chesses
+from chess.chess import Chess
 from chess import chess
 from point.point import Point
 from chess.tempPoint.tempPoint import TempPoint
@@ -66,6 +66,7 @@ def createTot(board):
             elif(i == 1):
                 tot = Tot(Point(j*2, 6), 0)
             board.chesses.append(tot)
+            board.activeChesses.append(tot)
             for c in board.chesses:
                 if type(c) == TempPoint:
                     if(c.point == tot.point):

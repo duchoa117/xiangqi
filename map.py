@@ -1,4 +1,4 @@
-from chess.chess import Chess, chesses
+from chess.chess import Chess
 from chess import chess
 from point.point import Point
 import setUp

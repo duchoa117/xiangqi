@@ -1,5 +1,5 @@
 
-from chess.chess import chesses, Chess
+from chess.chess import Chess
 from chess.tempPoint.tempPoint import createTempPoint
 from chess.tot.tot import createTot, Tot
 from chess.king.king import createKing, King
@@ -50,45 +50,61 @@ def positionValue(chess):
 class Board():
     def __init__(self):
         self.chesses = []
+        self.activeChesses = []
         self.score = 0
         setChess(self)
 
     def setScore(self):
-        for c in self.chesses:
-            if(c.active):
-                if(c.white):
-                    self.score = self.score - c.value - positionValue(c)
-                else:
-                    self.score = self.score + c.value + positionValue(c)
+       
+        for c in self.activeChesses:
+                    if(c.white):
+                        self.score = self.score - c.value - positionValue(c)
+                    else:
+                        self.score = self.score + c.value + positionValue(c)
         
     def isDead(self, white):
+        
         if(white == 1):
-            for c in self.chesses:
+            for c in self.activeChesses:
                 if(c.shape == "K"):
                     return not c.active
         else:
-            for c in self.chesses:
+            for c in self.activeChesses:
                 if(c.shape == "k"):
                     return not c.active
+    def kingOverlap(self):
+        k_w = None
+        check = False
+        for c in self.activeChesses:
+            if(c.shape == "K"):
+                k_w = c
+        for c in self.activeChesses:
+            if(c.point.x == k_w.point.x):
+                if(c != k_w):
+                    if(c.shape != "k"):
+                        return False
+                    else:
+                        check = True
+        return check
+        
+        
     def generateNewBoardWhitesTurn(self):
         boards = []
-        for c in self.chesses:
+        
+        for c in self.activeChesses:
             if(c.white):
-                if(c.active):
-                    if(c.shape !=  "."):
-                        tempBoards = c.genarateNewBoards(self)
-                        for tB in tempBoards:
-                            boards.append(tB)
+                tempBoards = c.genarateNewBoards(self)
+                for tB in tempBoards:
+                    boards.append(tB)
+
         return boards
     def generateNewBoardBlacksTurn(self):
         boards = []
-        for c in self.chesses:
-            if(c.white == 0):
-                if(c.active):
-                    if(c.shape !=  "."):
-                        tempBoards = c.genarateNewBoards(self)
-                        for tB in tempBoards:
-                            boards.append(tB)
+        for c in self.activeChesses:
+            if(not c.white):
+                tempBoards = c.genarateNewBoards(self)
+                for tB in tempBoards:
+                    boards.append(tB)
         return boards
     
     def move(self, fromPoint, toPoint):
@@ -96,15 +112,18 @@ class Board():
         chess.move(toPoint, self)
     def clone(self):
         clone = Board()
+        clone.activeChesses.clear()
         for i in range(len(self.chesses)):
-            clone.chesses[i] = self.chesses[i].clone()
+            temp = self.chesses[i].clone()
+            clone.chesses[i] = temp
+            if(temp.active):
+                if(temp.shape != '.'):
+                    clone.activeChesses.append(temp)
         return clone
     def getChess(self, point):
-        for c in self.chesses:
-            if(c.active):
-                if(c.shape != "."):
-                    if(c.point == point):
-                        return c
+        for c in self.activeChesses:
+            if(c.point == point):
+                return c
 board = Board()
 
 

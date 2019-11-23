@@ -1,6 +1,6 @@
 from player.player import Player , players
 from random import choice
-from minimaxFunction import maxFun, minFun, maxDepth
+from minimaxFunction import maxFunWhite, minFunWhite, minFunBlack, maxFunBlack
 from board import board
 
 class Machine(Player):
@@ -9,23 +9,23 @@ class Machine(Player):
         self.get = 0
 
     def play(self, board):
-        # random move:
-        # randomMove(board)
-        # end 
-        board.chesses = minimaxMove(board).chesses
-def minimaxMove(board):
+        temp = minimaxMoveBlack(board)
+        board.chesses = temp.chesses
+        board.activeChesses = temp.activeChesses
+def minimaxMoveBlack(board):
+
     alpha = -10000
     beta = +10000
     depth = 0
     topBoardNo = 0
     topScore = -100000
+    maxDepth = 2 
+    if(len(board.activeChesses) < 16):
+        maxDepth = 3
     boards = board.generateNewBoardBlacksTurn()
     for i in range(len(boards)):
-        if(not boards[i].isDead(0)):
-            score = minFun(boards[i], depth + 1, alpha, beta)
-            if(score > topScore):
-                topBoardNo = i
-                topScore = score
+        if(not boards[i].kingOverlap()):
+            score = minFunBlack(boards[i], depth + 1, alpha, beta, maxDepth)
             if(score > topScore):
                 topBoardNo = i
                 topScore = score
@@ -33,6 +33,27 @@ def minimaxMove(board):
                 return boards[topBoardNo]
             if(score > alpha):
                 alpha = score
+    return boards[topBoardNo]
+def minimaxMoveWhite(board):
+    alpha = -10000
+    beta = +10000
+    depth = 0
+    topBoardNo = 0
+    lowestScore = 100000
+    maxDepth = 2 
+    if(len(board.activeChesses) < 16):
+        maxDepth = 3
+    boards = board.generateNewBoardWhitesTurn()
+    for i in range(len(boards)):
+        if(not boards[i].kingOverlap()):
+            score = maxFunWhite(boards[i], depth + 1, alpha, beta, maxDepth)
+            if(score < lowestScore):
+                topBoardNo = i
+                lowestScore = score
+            if(score < alpha):
+                return boards[topBoardNo]
+            if(score < beta):
+                beta = score
     return boards[topBoardNo]
 
 

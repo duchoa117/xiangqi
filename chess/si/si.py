@@ -1,4 +1,4 @@
-from chess.chess import Chess, chesses
+from chess.chess import Chess
 from chess import chess
 from point.point import Point
 from chess.tempPoint.tempPoint import TempPoint
@@ -43,6 +43,8 @@ def createSi(board):
         for j in range(2):
             si = Si(Point(3+j*2, i*9), 1-i)
             board.chesses.append(si)
+            board.activeChesses.append(si)
+
             for c in board.chesses:
                 if type(c) == TempPoint:
                     if(c.point == si.point):

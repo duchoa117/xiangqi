@@ -1,4 +1,4 @@
-from chess.chess import Chess, chesses
+from chess.chess import Chess
 from chess import chess
 from point.point import Point
 from chess.tempPoint.tempPoint import TempPoint
@@ -78,6 +78,8 @@ def createXe(board):
         for j in range(2):
             xe = Xe(Point(j*8, i*9), 1-i)
             board.chesses.append(xe)
+            board.activeChesses.append(xe)
+
             for c in board.chesses:
                 if type(c) == TempPoint:
                     if(c.point == xe.point):

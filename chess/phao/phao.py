@@ -1,4 +1,4 @@
-from chess.chess import Chess, chesses
+from chess.chess import Chess
 from chess import chess
 from point.point import Point
 from chess.tempPoint.tempPoint import TempPoint
@@ -99,6 +99,7 @@ def createPhao(board):
         for j in range(2):
             phao = Phao(Point(1+j*6, 2+i*5), 1-i)
             board.chesses.append(phao)
+            board.activeChesses.append(phao)
             for c in board.chesses:
                 if type(c) == TempPoint:
                     if(c.point == phao.point):

@@ -1,12 +1,5 @@
 
 from point.point import Point
-chesses = []
-def add(chess):
-    chesses.append(chess)
-
-def update():
-    for chess in chesses:
-        chess.update()
 def infor(point, board):
     for chess in board.chesses:
         if chess.active:
@@ -17,11 +10,10 @@ def infor(point, board):
     chess.printpMList()
     return chess
 def isChessPoint(point, board):
-    for c in board.chesses:
+    for c in board.activeChesses:
         if(c.point == point):
-            if(c.active):
-                if(c.white != None):
-                    return True
+            return True
+
     return False
 
 class Chess:
@@ -35,10 +27,9 @@ class Chess:
     def isTeammate(self, other):
         return(self.white == other.white)
     def isTeammatePoint(self, point, board):
-        for c in board.chesses:
+        for c in board.activeChesses:
             if c.point == point:
-                if(c.active):
-                        return self.isTeammate(c)
+                return self.isTeammate(c)
     def render(self):
         if(self.active):
             print(self.shape, end = ' ')
@@ -57,8 +48,9 @@ class Chess:
             if c.point == point:
                 if(c.active):
                     c.deactivate()
-                    if(c.shape != "."):
-                        self.value = self.value + 10
+                    if(c.shape != '.'):
+                        self.value += 10
+                        board.activeChesses.remove(c)
             elif c.point == self.point:
                 if c.shape == ".":
                     c.activate()
