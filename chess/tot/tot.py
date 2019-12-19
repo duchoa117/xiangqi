@@ -20,7 +20,6 @@ class Tot(Chess):
             mL.append(m1)
 
             if(self.point.y > 4):
-                self.value = 60
                 for i in range(-1, 2, 2):
                     mL.append(self.point + Point(i, 0))
             for m in mL:

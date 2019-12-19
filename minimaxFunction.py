@@ -1,13 +1,13 @@
 
-def minFunBlack(board, depth, alpha, beta, maxDepth):
+def minFunBlack(board, depth, alpha, beta, maxDepth, turn):
     lowestScore = 100000
     if(depth >= maxDepth):
         board.setScore()
         return board.score 
-    boards = board.generateNewBoardWhitesTurn()
+    boards = board.generateNewBoardWhitesTurn(turn)
     for i in range(len(boards)):
         if(not (boards[i]).isDead(0)):
-            score = maxFunBlack(boards[i], depth + 1, alpha, beta, maxDepth)
+            score = maxFunBlack(boards[i], depth + 1, alpha, beta, maxDepth, turn)
             if(score < lowestScore):
                 lowestScore = score
             if(score < alpha):
@@ -15,15 +15,15 @@ def minFunBlack(board, depth, alpha, beta, maxDepth):
             if(score < beta):
                 beta = score
     return lowestScore
-def maxFunBlack(board, depth, alpha, beta, maxDepth):
+def maxFunBlack(board, depth, alpha, beta, maxDepth, turn):
     topScore = -100000
     if(depth >= maxDepth):
         board.setScore()
         return board.score 
-    boards = board.generateNewBoardBlacksTurn()
+    boards = board.generateNewBoardBlacksTurn(turn)
     for i in range(len(boards)):
         if(not boards[i].kingOverlap()):
-            score = minFunBlack(boards[i], depth + 1, alpha, beta, maxDepth)
+            score = minFunBlack(boards[i], depth + 1, alpha, beta, maxDepth, turn)
             if(score > topScore):
                 topScore = score
             if(score > beta):
@@ -32,15 +32,15 @@ def maxFunBlack(board, depth, alpha, beta, maxDepth):
                 alpha = score
     return topScore
 
-def minFunWhite(board, depth, alpha, beta, maxDepth):
+def minFunWhite(board, depth, alpha, beta, maxDepth, turn):
     lowestScore = 100000
     if(depth >= maxDepth):
         board.setScore()
         return board.score 
-    boards = board.generateNewBoardWhitesTurn()
+    boards = board.generateNewBoardWhitesTurn(turn)
     for i in range(len(boards)):
         if(not boards[i].kingOverlap()):
-            score = maxFunWhite(boards[i], depth + 1, alpha, beta, maxDepth)
+            score = maxFunWhite(boards[i], depth + 1, alpha, beta, maxDepth, turn)
             if(score < lowestScore):
                 lowestScore = score
             if(score < alpha):
@@ -48,15 +48,15 @@ def minFunWhite(board, depth, alpha, beta, maxDepth):
             if(score < beta):
                 beta = score
     return lowestScore
-def maxFunWhite(board, depth, alpha, beta, maxDepth):
+def maxFunWhite(board, depth, alpha, beta, maxDepth, turn):
     topScore = -100000
     if(depth >= maxDepth):
         board.setScore()
         return board.score 
-    boards = board.generateNewBoardBlacksTurn()
+    boards = board.generateNewBoardBlacksTurn(turn)
     for i in range(len(boards)):
         if(not (boards[i]).isDead(1)):
-            score = minFunWhite(boards[i], depth + 1, alpha, beta, maxDepth)
+            score = minFunWhite(boards[i], depth + 1, alpha, beta, maxDepth, turn)
             if(score > topScore):
                 topScore = score
             if(score > beta):

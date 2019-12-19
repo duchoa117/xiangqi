@@ -49,7 +49,6 @@ class Chess:
                 if(c.active):
                     c.deactivate()
                     if(c.shape != '.'):
-                        self.value += 10
                         board.activeChesses.remove(c)
             elif c.point == self.point:
                 if c.shape == ".":
@@ -68,9 +67,5 @@ class Chess:
         return boards
     def clone():
         pass
-            
-        
-
-                
     
 
