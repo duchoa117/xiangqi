@@ -22,8 +22,8 @@ class MachineBlack(Player):
             r = ''.join(r)
             return r
         else:
-            temp = minimaxMoveBlack(board, turn, 0)
-            r = compareBoard(board, temp)
+            temp = minimaxMoveBlack(board, turn)
+            r = compareBoard(board, temp, 0)
             board.chesses = temp.chesses
             board.activeChesses = temp.activeChesses
             return r
@@ -44,8 +44,8 @@ class MachineWhite(Player):
             print(r)
             return r
         else:
-            temp = minimaxMoveWhite(board, turn, 1)
-            r = compareBoard(board, temp)
+            temp = minimaxMoveWhite(board, turn)
+            r = compareBoard(board, temp, 1)
             board.chesses = temp.chesses
             board.activeChesses = temp.activeChesses
             return r

@@ -23,7 +23,7 @@ def compareBoard(board1, board2, white):
                 r[2] = str(c1.point.x)
                 break
     for c2 in board2.activeChesses:
-        if c2.white == c2.white:
+        if c2.white == white:
             f2 = False
             for c1 in board1.activeChesses:
                 if c1.white == white:
@@ -141,44 +141,44 @@ class Board():
         
     def generateNewBoardWhitesTurn(self, turn):
         boards = []
-        if(turn < 4):
-            for c in self.activeChesses:
-                if(c.white):
-                    t = type(c)
-                    if(t == Xe or t == Ma or t == Phao):
-                        tempBoards = c.generateNewBoards(self)
-                        for tB in tempBoards:
-                            boards.append(tB)
-            return boards
+        # if(turn < 4):
+        #     for c in self.activeChesses:
+        #         if(c.white):
+        #             t = type(c)
+        #             if(t == Xe or t == Ma or t == Phao):
+        #                 tempBoards = c.generateNewBoards(self)
+        #                 for tB in tempBoards:
+        #                     boards.append(tB)
+        #     return boards
 
-        else:
-            for c in self.activeChesses:
-                if(c.white):
-                    tempBoards = c.generateNewBoards(self)
-                    for tB in tempBoards:
-                        boards.append(tB)
+        # else:
+        for c in self.activeChesses:
+            if(c.white):
+                tempBoards = c.generateNewBoards(self, turn)
+                for tB in tempBoards:
+                    boards.append(tB)
 
-            return boards
+        return boards
     def generateNewBoardBlacksTurn(self, turn):
         boards = []
-        if(turn < 4):
-            for c in self.activeChesses:
-                if(not c.white):
-                    t = type(c)
-                    if(t == Xe or t == Ma or t == Phao):
-                        tempBoards = c.generateNewBoards(self)
-                        for tB in tempBoards:
-                            boards.append(tB)
-            return boards
+        # if(turn < 4):
+        #     for c in self.activeChesses:
+        #         if(not c.white):
+        #             t = type(c)
+        #             if(t == Xe or t == Ma or t == Phao):
+        #                 tempBoards = c.generateNewBoards(self)
+        #                 for tB in tempBoards:
+        #                     boards.append(tB)
+        #     return boards
 
-        else:
-            for c in self.activeChesses:
-                if(not c.white):
-                    tempBoards = c.generateNewBoards(self)
-                    for tB in tempBoards:
-                        boards.append(tB)
-            return boards
-        
+        # else:
+        for c in self.activeChesses:
+            if(not c.white):
+                tempBoards = c.generateNewBoards(self, turn)
+                for tB in tempBoards:
+                    boards.append(tB)
+        return boards
+    
     def move(self, fromPoint, toPoint):
         chess = self.getChess(fromPoint)
         chess.move(toPoint, self)

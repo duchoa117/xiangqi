@@ -1,7 +1,7 @@
 import socket
 import time
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((socket.gethostname(), 1234))
+s.bind(('192.168.11.46', 9999))
 s.listen(5)
 while True:
     clientsocket, address = s.accept()

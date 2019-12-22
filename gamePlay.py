@@ -7,7 +7,7 @@ import pygame
 import socket
 def youSecond(board):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect((socket.gethostname(), 1234))
+        s.connect(('192.168.11.46', 9999))
         run = True
         turn = 1
         new_msg = True
