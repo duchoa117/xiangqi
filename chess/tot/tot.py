@@ -1,14 +1,17 @@
 from chess.chess import Chess
 from chess import chess
 from point.point import Point
-from chess.tempPoint.tempPoint import TempPoint
+import pygame
+from chess.images.imageChess import totB, totW
 
 class Tot(Chess):
     def __init__(self, point, white):
         if(white == 1):
             Chess.__init__(self, point, "T", white)
+
         elif(white == 0):
             Chess.__init__(self, point, "t", white)
+
         self.value = 30
     def positiveMove(self, currentBoard):
         # setUp:
@@ -47,13 +50,20 @@ class Tot(Chess):
         return clone
 
 
-    def genarateNewBoards(self, currentBoard):
+    def genarateNewBoards(self, currentBoard, tP):
         boards = []
         self.positiveMove(currentBoard)
         for i in range(len(self.pMove)):
-            boards.append(currentBoard.clone())
+            boards.append(currentBoard.clone(tP))
             boards[i].move(self.point, self.pMove[i])
         return boards
+    def imageRender(self, canvas):
+        if self.active:
+            if self.white:
+                canvas.blit(totW, (35+self.point.x*71-totW.get_size()[0]/2, 40+self.point.y*70-totW.get_size()[1]/2))
+            else:
+                canvas.blit(totB, (35+self.point.x*71-totB.get_size()[0]/2, 40+self.point.y*70-totB.get_size()[1]/2))
+
 
         
 
@@ -66,10 +76,6 @@ def createTot(board):
                 tot = Tot(Point(j*2, 6), 0)
             board.chesses.append(tot)
             board.activeChesses.append(tot)
-            for c in board.chesses:
-                if type(c) == TempPoint:
-                    if(c.point == tot.point):
-                        c.deactivate()
 
 
 

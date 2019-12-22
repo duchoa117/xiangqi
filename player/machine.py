@@ -1,8 +1,10 @@
 from player.player import Player , players
 from random import choice
 from minimaxFunction import maxFunWhite, minFunWhite, minFunBlack, maxFunBlack
-from board import board
+from board import board, compareBoard
 from chessMetrics import firstBlackMove, firstWhiteMove, convertToPoint
+
+
 class MachineBlack(Player):
     def __init__(self):
         Player.__init__(self)
@@ -12,10 +14,19 @@ class MachineBlack(Player):
         if turn == 1:
             m = convertToPoint(choice(firstBlackMove))
             board.move(m[0], m[1])
+            r = ['y', ' ', 'x', ' ', 'y', ' ', 'x']
+            r[0] = str(m[0].y)
+            r[2] = str(m[0].x)
+            r[4] = str(m[1].y)
+            r[6] = str(m[1].x)
+            r = ''.join(r)
+            return r
         else:
-            temp = minimaxMoveBlack(board, turn)
+            temp = minimaxMoveBlack(board, turn, 0)
+            r = compareBoard(board, temp)
             board.chesses = temp.chesses
             board.activeChesses = temp.activeChesses
+            return r
 class MachineWhite(Player):
     def __init__(self):
         Player.__init__(self)
@@ -24,10 +35,20 @@ class MachineWhite(Player):
         if turn == 1:
             m = convertToPoint(choice(firstWhiteMove))
             board.move(m[0], m[1])
+            r = ['y', ' ', 'x', ' ', 'y', ' ', 'x']
+            r[0] = str(m[0].y)
+            r[2] = str(m[0].x)
+            r[4] = str(m[1].y)
+            r[6] = str(m[1].x)
+            r = ''.join(r)
+            print(r)
+            return r
         else:
-            temp = minimaxMoveWhite(board, turn)
+            temp = minimaxMoveWhite(board, turn, 1)
+            r = compareBoard(board, temp)
             board.chesses = temp.chesses
             board.activeChesses = temp.activeChesses
+            return r
 def minimaxMoveBlack(board, turn):
     alpha = -10000
     beta = +10000
@@ -37,7 +58,7 @@ def minimaxMoveBlack(board, turn):
     maxDepth = 2
     if(turn < 4):
         maxDepth = 3
-    if(len(board.activeChesses) < 15):
+    if(len(board.activeChesses) < 20):
         maxDepth = 3
     boards = board.generateNewBoardBlacksTurn(turn)
     for i in range(len(boards)):
@@ -62,7 +83,7 @@ def minimaxMoveWhite(board, turn):
     maxDepth = 2
     if(turn < 4):
         maxDepth = 3
-    if(len(board.activeChesses) < 15):
+    if(len(board.activeChesses) < 20):
         maxDepth = 3
     boards = board.generateNewBoardWhitesTurn(turn)
     for i in range(len(boards)):

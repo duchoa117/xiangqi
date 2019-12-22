@@ -1,0 +1,16 @@
+import pygame
+kingW = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/kingW.png")
+kingB = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/kingB.png")
+maW = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/maW.png")
+maB = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/maB.png")
+phaoW = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/phaoW.png")
+phaoB = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/phaoB.png")
+siW = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/siW.png")
+siB = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/siB.png")
+totW = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/totW.png")
+totB = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/totB.png")
+tuongW = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/tuongW.png")
+tuongB = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/tuongB.png")
+xeW = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/xeW.png")
+xeB = pygame.image.load("/Users/apple/Desktop/ai:mlPr/xiangqi/chess/images/xeB.png")
+

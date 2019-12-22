@@ -1,6 +1,5 @@
 
 from chess.chess import Chess
-from chess.tempPoint.tempPoint import createTempPoint
 from chess.tot.tot import createTot, Tot
 from chess.king.king import createKing, King
 from chess.si.si import createSi, Si
@@ -9,50 +8,79 @@ from chess.phao.phao import createPhao, Phao
 from chess.ma.ma import createMa, Ma
 from chess.tuong.tuong import createTuong, Tuong
 import chessMetrics
+def compareBoard(board1, board2, white):
+    r = ['y', ' ', 'x', ' ', 'y', ' ', 'x']
+    for c1 in board1.activeChesses:
+        if c1.white == white:
+            f1 = False
+            for c2 in board2.activeChesses:
+                if c2.white == white:
+                    if c1.point == c2.point:
+                        f1 = True
+                        break
+            if not f1:
+                r[0] = str(c1.point.y)
+                r[2] = str(c1.point.x)
+                break
+    for c2 in board2.activeChesses:
+        if c2.white == c2.white:
+            f2 = False
+            for c1 in board1.activeChesses:
+                if c1.white == white:
+                    if c2.point == c1.point:
+                        f2 = True
+                        break
+            if not f2:
+                r[4] = str(c2.point.y)
+                r[6] = str(c2.point.x)
+                break
+    r = ''.join(r)
+    return r
+
+
+
+
+
 def setChess(broad):
-        createTempPoint(broad)
-        createTot(broad)
-        createKing(broad)
-        createSi(broad)
-        createXe(broad)
-        createMa(broad)
-        createTuong(broad)
-        createPhao(broad)
+    createTot(broad)
+    createKing(broad)
+    createSi(broad)
+    createXe(broad)
+    createMa(broad)
+    createTuong(broad)
+    createPhao(broad)
 def positionValue(chess):
     m = chessMetrics.king
     t = type(chess)
-    if(t == Ma):
-        # print("ma")
+    if(t == Xe):
         if(chess.white):
-            m = chessMetrics.maW
+            m = chessMetrics.xeW
         else:
-            m = chessMetrics.maB
+            m = chessMetrics.xeB
     elif(t == Phao):
         # print("phao")
         if(chess.white):
             m = chessMetrics.phaoW
         else:
             m = chessMetrics.phaoB
-    elif(t == Si):
-        # print("si")
-        m = chessMetrics.si
     elif(t == Tot):
         # print("tot")
         if(chess.white):
             m = chessMetrics.totW
         else:
             m = chessMetrics.totB
+    elif(t == Ma):
+        # print("ma")
+        if(chess.white):
+            m = chessMetrics.maW
+        else:
+            m = chessMetrics.maB
+    elif(t == Si):
+        # print("si")
+        m = chessMetrics.si
     elif(t == Tuong):
         # print("tuong")
         m = chessMetrics.tuong
-    elif(t == Xe):
-        # print("xe")
-        if(chess.white):
-            m = chessMetrics.xeW
-        else:
-            m = chessMetrics.xeB
-    if(m[chess.point.y*9 + chess.point.x] < -100):
-        print("pos value: ",m[chess.point.y*9 + chess.point.x])
     return m[chess.point.y*9 + chess.point.x]
 
 class Board():
@@ -61,18 +89,12 @@ class Board():
         self.activeChesses = []
         self.score = 0
         setChess(self)
-
     def setScore(self):
         for c in self.activeChesses:
             if(c.white):
                 self.score = self.score - c.value - positionValue(c)
-                
             else:
                 self.score = self.score + c.value + positionValue(c)
-            # if(self.score < -1000):
-            #         print("score=", self.score)
-        # if(self.score < -100):
-        # print("score=", self.score)
         
     def isDead(self, white):
         
@@ -123,19 +145,16 @@ class Board():
             for c in self.activeChesses:
                 if(c.white):
                     t = type(c)
-                    if t != Tot:
-                        if t!= King:
-                            if t!= Si:
-                                if t!= Tuong:
-                                    tempBoards = c.genarateNewBoards(self)
-                                    for tB in tempBoards:
-                                        boards.append(tB)
+                    if(t == Xe or t == Ma or t == Phao):
+                        tempBoards = c.generateNewBoards(self)
+                        for tB in tempBoards:
+                            boards.append(tB)
             return boards
 
         else:
             for c in self.activeChesses:
                 if(c.white):
-                    tempBoards = c.genarateNewBoards(self)
+                    tempBoards = c.generateNewBoards(self)
                     for tB in tempBoards:
                         boards.append(tB)
 
@@ -146,19 +165,16 @@ class Board():
             for c in self.activeChesses:
                 if(not c.white):
                     t = type(c)
-                    if t != Tot:
-                        if t!= King:
-                            if t!= Si:
-                                if t!= Tuong:
-                                    tempBoards = c.genarateNewBoards(self)
-                                    for tB in tempBoards:
-                                        boards.append(tB)
+                    if(t == Xe or t == Ma or t == Phao):
+                        tempBoards = c.generateNewBoards(self)
+                        for tB in tempBoards:
+                            boards.append(tB)
             return boards
 
         else:
             for c in self.activeChesses:
                 if(not c.white):
-                    tempBoards = c.genarateNewBoards(self)
+                    tempBoards = c.generateNewBoards(self)
                     for tB in tempBoards:
                         boards.append(tB)
             return boards
@@ -173,13 +189,11 @@ class Board():
             temp = self.chesses[i].clone()
             clone.chesses[i] = temp
             if(temp.active):
-                if(temp.shape != '.'):
-                    clone.activeChesses.append(temp)
+                clone.activeChesses.append(temp)
         return clone
     def getChess(self, point):
         for c in self.activeChesses:
             if(c.point == point):
                 return c
+    
 board = Board()
-
-

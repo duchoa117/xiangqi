@@ -1,21 +1,11 @@
-from chess import chess
+from board import Board
 from point.point import Point
+def gameIO(board, move):
+    fromPoint = Point(int(move[2]), int(move[0]))
+    toPoint = Point(int(move[6]), int(move[4]))
+    board.move(fromPoint, toPoint)
+    
 
-
-def gameIO(board):
-    while(True):
-        print("Position: ")
-        x = int(input("x = "))
-        y = int(input("y = "))
-        tP = Point(x, y)
-        print("Chess information: ")
-        c = chess.infor(tP, board)
-        move = input("Move?(y/n)")
-        if(move == "y"):
-                movePositionX = int(input("X: "))
-                movePositionY = int(input("Y: "))
-                c.move(Point(movePositionX, movePositionY), board)
-                break
 
 
         

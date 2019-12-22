@@ -1,3 +1,4 @@
+import pygame
 
 from point.point import Point
 def infor(point, board):
@@ -5,15 +6,11 @@ def infor(point, board):
         if chess.active:
             if chess.point == point:
                 break
-    chess.positiveMove(board)
-    print("- Positive move:")
-    chess.printpMList()
     return chess
 def isChessPoint(point, board):
     for c in board.activeChesses:
         if(c.point == point):
             return True
-
     return False
 
 class Chess:
@@ -24,6 +21,7 @@ class Chess:
         self.active = True
         self.pMove = []
         self.value = 0
+        self.image = None
     def isTeammate(self, other):
         return(self.white == other.white)
     def isTeammatePoint(self, point, board):
@@ -48,11 +46,8 @@ class Chess:
             if c.point == point:
                 if(c.active):
                     c.deactivate()
-                    if(c.shape != '.'):
-                        board.activeChesses.remove(c)
-            elif c.point == self.point:
-                if c.shape == ".":
-                    c.activate()
+                    self.value += 10
+                    board.activeChesses.remove(c)
         self.point = point
     def printpMList(self):
         for p in self.pMove:
@@ -61,11 +56,12 @@ class Chess:
     def generateNewBoards(self, currentBoard):
         boards = []
         self.positiveMove(currentBoard)
-        for i in range(self.pMove.len()):
+        for i in range(len(self.pMove)):
             boards.append(currentBoard.clone())
             boards[i].move(self.point, self.pMove[i])
         return boards
     def clone():
         pass
-    
+    def imageRender(self, canvas):
+       pass
 
