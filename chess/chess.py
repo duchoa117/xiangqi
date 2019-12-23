@@ -53,19 +53,9 @@ class Chess:
         for p in self.pMove:
             print(p, end = " ")
         print()
-    def generateNewBoards(self, currentBoard, turn):
+    def generateNewBoards(self, currentBoard):
         boards = []
-        if turn < 4:
-            if self.shape == 'p':
-                if self.point == Point(7, 7) or self.point == Point(1, 7):
-                    self.pMove.clear()
-                    self.pMove.append(Point(4, 7))
-            elif self.shape == 'P':
-                if self.point == Point(7, 2) or self.point == Point(1, 2):
-                    self.pMove.clear()
-                    self.pMove.append(Point(4, 2))
-        else:
-            self.positiveMove(currentBoard)
+        self.positiveMove(currentBoard)
         for i in range(len(self.pMove)):
             boards.append(currentBoard.clone())
             boards[i].move(self.point, self.pMove[i])

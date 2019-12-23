@@ -5,39 +5,52 @@ from point.point import Point
 from player.player import players
 import pygame
 import socket
+import re
 def youSecond(board):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect(('192.168.11.46', 9999))
+        s.connect(('192.168.1.156', 2222))
         run = True
         turn = 1
         new_msg = True
         while run:
                 renderMap(board)
-                move = s.recv(1024).decode("utf-8")
+                received = s.recv(1024).decode("utf-8")
+                move = re.findall(r'\d+', received)
+                while(len(move) != 4 or received[0] != 'B'):
+                    received = s.recv(1024).decode("utf-8")
+                    move = re.findall(r'\d+', received)
+                move = move[0]+" "+move[1]+" "+move[2]+" "+move[3]
                 if new_msg:
                         new_msg = False
                 print("SERVER: ", move)
+
                 players[0].play(board, move)
                 new_msg = True
                 turn +=1
                 renderMap(board)
                 print("Black machine is thinking.....")
-                myTurn = players[1].play(board, turn).encode("utf-8")
-                s.send(myTurn)
+                myTurn = players[2].play(board, turn)
+                s.send(("RED:"+myTurn+":"+"Chat\n").encode())
                 turn += 1
 def youFrist(board):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect((socket.gethostname(), 1234))
+        s.connect(("192.168.1.156", 2222))
         run = True
         turn = 1
         while run:
                 renderMap(board)
                 print("Red machine is thinking.....")
-                myTurn = players[2].play(board, turn).decode('utf-8')
+                myTurn = players[1].play(board, turn)
                 turn +=1
                 renderMap(board)
-                s.send(bytes(myTurn,"utf-8"))
+                s.send(("RED:"+myTurn+":"+"Chat\n").encode())
                 move = s.recv(1024).decode("utf-8")
+                while(move[0] == "R"):
+                    move = s.recv(1024).decode("utf-8")
+                # print(move)
+                move = re.findall(r'\d+', move)
+                move = move[0]+" "+move[1]+" "+move[2]+" "+move[3]
+                # print(move)
                 players[0].play(board, move) 
                 turn += 1
 def matrixLoad(board):
